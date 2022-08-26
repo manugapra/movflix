@@ -1,0 +1,156 @@
+<nav class="navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand ms-md-3 ms-lg-5" href="#">
+      <img class="img-fluid" src="../../../assets/imgs/movflix.svg" alt="" />
+    </a>
+  </div>
+</nav>
+
+<div
+  class="container-fluid accounts-wrapper d-flex align-items-center justify-content-center flex-column"
+>
+  <section id="accounts" class="w-100">
+    <div class="row gx-0">
+      <div class="col-12">
+        <h1 class="text-center" *ngIf="accounts.length === 0; else accountsH1">
+          No tienes ninguna cuenta, crea la primera.
+        </h1>
+      </div>
+      <ng-template #accountsH1>
+        <div class="col-12">
+          <h1 class="text-center">¿Quién eres? Elige tu perfil</h1>
+        </div>
+        <div class="col-12">
+          <div class="row gx-0">
+            <div class="col-12 col-md-8 col-xl-6 mx-md-auto">
+              <div class="avatar-container cursor-pointer">
+                <div
+                  *ngFor="let account of accounts"
+                  (click)="chooseAccount(account)"
+                >
+                  <img
+                    class="img-fluid avatar"
+                    [src]="'../../../assets/imgs/avatars/' + account?.avatar"
+                    alt=""
+                  />
+                  <h5 class="text-center mt-3">{{ account?.name }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <div class="row gx-0 mt-5">
+      <div class="col-12 text-center">
+        <button
+          class="secondary-button mt-3 mt-sm-0"
+          (click)="goToManageAccounts()"
+        >
+          Administrar perfiles
+        </button>
+        <button
+          class="secondary-button ms-3 mt-3 mt-sm-0"
+          (click)="openModal()"
+        >
+          Nueva cuenta
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div
+  class="modal fade"
+  id="newAccountModal"
+  #newAccountModal
+  tabindex="-1"
+  aria-labelledby="newAccountModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newAccountModalLabel">Nueva cuenta</h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newAccountForm">
+          <div class="row gx-0">
+            <div class="col-12">
+              <div class="row gx-0">
+                <div class="col-12">
+                  <label for="name" class="form-label">Nombre del perfil</label>
+                </div>
+                <div class="col-12">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    formControlName="name"
+                  />
+                  <!-- Validaciones -->
+                  <div
+                    *ngIf="
+                      newAccountForm.get('name').errors &&
+                      (newAccountForm.get('name').touched ||
+                        newAccountForm.get('name').dirty)
+                    "
+                  >
+                    <p
+                      class="error-msg"
+                      *ngIf="newAccountForm.get('name').errors.required"
+                    >
+                      El nombre es obligatorio.
+                    </p>
+                    <p
+                      class="error-msg"
+                      *ngIf="newAccountForm.get('name').errors.notValidName"
+                    >
+                      El nombre no es válido.
+                    </p>
+                    <p
+                      class="error-msg"
+                      *ngIf="newAccountForm.get('name').errors.existAccount"
+                    >
+                      Esa cuenta ya existe.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 mt-3">
+              <div class="avatar-container cursor-pointer">
+                <div
+                  *ngFor="let avatar of avatars"
+                  [class.chosen-avatar]="currentAvatar === avatar"
+                  (click)="chooseAvatar(avatar)"
+                >
+                  <img
+                    class="img-fluid avatar"
+                    [src]="'../../../assets/imgs/avatars/' + avatar"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <!-- Validaciones -->
+              <div *ngIf="chooseAvatarError">
+                <p class="error-msg">El avatar es obligatorio.</p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="primary-button" (click)="saveNewAccount()">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
