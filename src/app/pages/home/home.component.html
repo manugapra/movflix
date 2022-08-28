@@ -1,1 +1,9 @@
-<p>home works!</p>
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+  <div class="row gx-0">
+    <div class="col-12">
+      <app-carousel *ngIf="movies.length > 1" [movies]="movies"></app-carousel>
+    </div>
+  </div>
+</div>

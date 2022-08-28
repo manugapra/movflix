@@ -1,10 +1,4 @@
-<nav class="navbar">
-  <div class="container-fluid">
-    <a class="navbar-brand ms-md-3 ms-lg-5" href="#">
-      <img class="img-fluid" src="../../../assets/imgs/movflix.svg" alt="" />
-    </a>
-  </div>
-</nav>
+<app-navbar></app-navbar>
 
 <div
   class="container-fluid accounts-wrapper d-flex align-items-center justify-content-center flex-column"
@@ -13,7 +7,7 @@
     <div class="row gx-0">
       <div class="col-12">
         <h1 class="text-center" *ngIf="accounts.length === 0; else accountsH1">
-          No tienes ninguna cuenta, crea la primera.
+          No tienes ninguna cuenta, crea la primera. Sevillafc1905
         </h1>
       </div>
       <ng-template #accountsH1>
@@ -44,6 +38,7 @@
     <div class="row gx-0 mt-5">
       <div class="col-12 text-center">
         <button
+          *ngIf="accounts.length > 0"
           class="secondary-button mt-3 mt-sm-0"
           (click)="goToManageAccounts()"
         >

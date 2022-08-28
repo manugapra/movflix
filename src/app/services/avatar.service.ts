@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as fs from 'file-system';
 
 @Injectable({
   providedIn: 'root',

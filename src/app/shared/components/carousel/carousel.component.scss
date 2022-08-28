@@ -1,0 +1,54 @@
+.navigation-wrapper {
+  position: relative;
+}
+.navigation-wrapper:hover {
+  .arrow {
+    display: flex;
+  }
+}
+
+.arrow {
+  width: 45px;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  fill: #fff;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: none;
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.arrow::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.arrow--left {
+  //   left: 5px;
+}
+
+.arrow--right {
+  left: auto;
+  right: 0px;
+}
+
+// .keen-slider__slide:hover {
+//   transform: scale(1.5) !important;
+//   transition: 0.5s;
+// }
